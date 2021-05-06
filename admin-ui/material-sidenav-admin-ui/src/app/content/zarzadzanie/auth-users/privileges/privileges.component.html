@@ -1,0 +1,122 @@
+
+<mat-form-field class="col-3 p-1" *ngIf="dataSource">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filtr">
+</mat-form-field>
+<div class="col-9 p-1">
+    <button  mat-raised-button color="accent" (click)="openDialog(privilegeSave);" style="float:right;margin:5px"> Dodaj</button>
+</div>
+  <div class="shadow" >
+    <div class="example-loading-shade"
+            *ngIf="isLoadingResults || isRateLimitReached">
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+        <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+        GitHub's API rate limit has been reached. It will be reset in one minute.
+        </div>
+    </div>
+    <table mat-table [dataSource]="dataSource" matSort class="table-striped table-hover" >
+  
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nazwa </th>
+        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+      </ng-container>
+      
+  <ng-container matColumnDef="akcja">
+    <th mat-header-cell  *matHeaderCellDef style="width:50px"> Akcja </th>
+    <td mat-cell *matCellDef="let row" >
+        <button mat-icon-button color="accent" (click)="openDialog(row);"  aria-label="Edytuj">
+            <span class="fa fa-edit" style="font-size:larger"></span>
+        </button>
+    </td>
+  </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
+
+<!--
+<p-toast position="center" key="c" (onClose)="onReject()"  [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div style="text-align: center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6">
+                <button type="button" class="btn btn-block btn-danger" (click)="onConfirm()" label="Yes" >Tak</button>
+            </div>
+            <div class="ui-g-6">
+                <button type="button" class="btn btn-block btn-success" (click)="onReject()" label="No" >Nie</button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
+
+<p-dialog header="Dodaj uprawnienie"  [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '40%', top: '20px', minWidth: '200px'}" [minY]="70" 
+        [maximizable]="true" appendTo="body">
+        <div class="container" fxLayout fxLayoutAlign="center" fxLayoutGap="5px">
+            <div fxFlex="80%">
+              <input pInputText id="privilegeSaveName" [style]="{width:'100%'}" [(ngModel)]="privilegeSave.name" placeholder="nazwa"
+                name="privilegeSaveName">
+            </div>
+      </div>
+        <p-footer>
+            <button mat-raised-button color="primary" (click)=onRowEditAdd(privilegeSave) class="fa fa-save"> Zapisz</button>
+            <button mat-raised-button color="accent" class="fa fa-undo" (click)="display=false" label="Wyjdź"> Wyjdź</button>
+        </p-footer>
+</p-dialog>
+
+<button   mat-raised-button color="accent" class="fa fa-plus" class="fa fa-plus" (click)="showDialog()" style="float:right;margin:5px"> Dodaj</button>
+<div style="clear: both"></div>
+<div class=" ui-shadow" *ngIf="privileges">
+    <p-table class="mui-table" #dt *ngIf="privileges" [value]="privileges" dataKey="id" editMode="row" [paginator]="true" [rows]="5" [paginator]="true" [rowsPerPageOptions]="[5,50,100]" [responsive]="false">
+        
+        <ng-template pTemplate="header">
+            <tr style="height:12px">
+              <th  [pSortableColumn]="'id'" style="width:50px"> Id </th>
+                <th  [pSortableColumn]="'name'">Nazwa</th>
+                <th  style="width:90px;text-align: center;" rowspan="2">Akcje</th>
+            </tr>
+                <tr>
+                    <th></th>
+                    <th >             
+                        <input  pInputText class="form-control" type="text" (input)="dt.filter($event.target.value, 'name', 'contains')">            
+                     </th>
+                </tr>
+        </ng-template>
+       
+      <ng-template pTemplate="body" let-privilege let-editing="editing" let-ri="rowIndex">
+          <tr [pEditableRow]="privilege" [className]="editing ? 'selectedRow' : 'inactive'">
+              <td style="width:50px;text-align: center;">{{privilege.id}}</td>
+              <td style="text-align: left;">
+                  <p-cellEditor>
+                      <ng-template pTemplate="input">
+                          <input pInputText [(ngModel)]="privilege.name">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                          {{privilege.name}}
+                      </ng-template>
+                  </p-cellEditor>
+              </td>
+              <td style="text-align:center" >
+                <button *ngIf="!editing" mat-mini-fab color="warn" style="margin-right:5px" class="fa fa-remove mat-smaller" (click)="showConfirm(privilege)"></button>
+                <button *ngIf="!editing" mat-mini-fab color="primary" pInitEditableRow class="fa fa-check mat-smaller" (click)="onRowEditInit(privilege)"></button>
+                <button *ngIf="editing" mat-mini-fab color="accent" pSaveEditableRow   class="fa fa-pencil mat-smaller" style="margin-right: .5em" (click)="onRowEditSave(privilege)"></button>
+                <button *ngIf="editing" mat-mini-fab color="primary" pCancelEditableRow  class="fa fa-undo mat-smaller" (click)="onRowEditCancel(privilege, ri)"></button>
+           
+              </td>
+          </tr>
+      </ng-template>
+    </p-table>
+    </div>
+-->

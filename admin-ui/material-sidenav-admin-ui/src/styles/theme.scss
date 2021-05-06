@@ -1,0 +1,47 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+
+$my-app-primary: mat-palette($mat-blue-grey);
+$my-app-accent:  mat-palette($mat-pink, 500, 900, A100);
+$my-app-warn:    mat-palette($mat-deep-orange);
+$my-app-theme-light: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+$my-app-theme-dark: mat-dark-theme($my-app-primary, $my-app-accent, $my-app-warn);
+
+.alternate-theme {
+  $alternate-primary: mat-palette($mat-light-blue);
+  $alternate-accent:  mat-palette($mat-yellow, 400);
+  $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent);}
+
+  @include angular-material-theme($my-app-theme-light);
+  
+  .dark-theme {
+    @include angular-material-theme($my-app-theme-dark);
+  }
+  .light-theme {
+    @include angular-material-theme($my-app-theme-light);
+  }
+ // domyślny wklej w angular.json: "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+ 
+/*
+ $light-custom-theme-primary: mat-palette($mat-blue);
+$light-custom-theme-accent: mat-palette($mat-orange, A200, A100, A400);
+$light-custom-theme-warn: mat-palette($mat-red);
+$light-custom-theme: mat-light-theme($light-custom-theme-primary, $light-custom-theme-accent, $light-custom-theme-warn);
+
+.light-theme {
+  @include angular-material-theme($light-custom-theme);
+}
+
+
+
+$custom-theme-primary: mat-palette($mat-blue);
+$custom-theme-accent: mat-palette($mat-orange, A200, A100, A400);
+$custom-theme-warn: mat-palette($mat-red);
+$custom-theme: mat-dark-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
+
+
+.dark-theme {
+  @include angular-material-theme($custom-theme);
+}
+*/

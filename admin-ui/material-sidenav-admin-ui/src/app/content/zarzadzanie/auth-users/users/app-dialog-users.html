@@ -1,0 +1,50 @@
+
+<h1 mat-dialog-title >Modyfikuj użytkownika</h1>
+<div mat-dialog-content [formGroup]="userForm" >
+  <div class="row">
+     <div class="col-4">
+        <mat-form-field class="w-100 p-1">
+          <mat-label>Imię</mat-label>
+          <input matInput placeholder="krótka nazwa" [(ngModel)]="data.user.username" formControlName="nameUser">
+        </mat-form-field>
+     </div>
+        <div class="col-2 text-center p-1" style="display: inline-block;overflow: hidden;" >
+          <div style="font-size:12px;color:gray">Aktywny</div>
+          <mat-checkbox  [(ngModel)]="data.user.enabled" formControlName="activUser"></mat-checkbox>
+        </div>
+        <div class="col-6">
+        <mat-form-field class="w-100 p-1"> 
+          <mat-label>Hasło</mat-label>
+          <input matInput placeholder="haslo" [(ngModel)]="data.user.password" formControlName="passUser">
+        </mat-form-field>
+       </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field class="w-100 p-1">
+          <mat-label >Role</mat-label>
+          <mat-select [compareWith]="compareWithFn" multiple [(ngModel)]="data.user.roleCollection" 
+          formControlName="roleUser">
+            <mat-option *ngFor="let topping of data.roles" [value]="topping">{{topping.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+        <div class="col-6">
+        <mat-form-field class="w-100 p-1">
+          <mat-label >Grupa</mat-label>
+          <mat-select  [compareWith]="compareWithFn" [(ngModel)]="data.user.grupa" formControlName="groupUser">
+            <mat-option *ngFor="let topping of data.grups" [value]="topping">{{topping.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions class="float-r"> 
+    <button mat-button color="warn" *ngIf="data.user.id" (click)="usun()" (click)="openSnackBar(snackBarAction, snackBarValue)" class="shadow" [mat-dialog-close]="data" cdkFocusInitia aria-label="usun">Usuń</button>
+    <button mat-button color="primary" class="ml-auto shadow" [disabled]="!userForm.valid" (click)="zapisz()" 
+          (click)="openSnackBar(snackBarAction, snackBarValue)"  [mat-dialog-close]="data" cdkFocusInitia 
+          aria-label="zapisz" >Zapisz</button>
+    <button mat-icon-button color="primary" class="shadow ml-4" (click)="onNoClick()"  aria-label="Wróć">
+            <span class="fa fa-undo" style="font-size:larger"></span>
+    </button>
+</div>

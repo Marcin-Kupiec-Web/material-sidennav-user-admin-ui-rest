@@ -1,0 +1,19 @@
+<div style="background-color:#0047AB;height:100%;top:0px;position: fixed;width:100%;;">
+    <div  class="login-form-wrapper shadow">
+        
+        <form [formGroup]="signin">
+            <mat-form-field appearance="outline" class="w-100" >
+              <mat-label>Login</mat-label>
+              <input matInput [(ngModel)]="username" formControlName="username">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Hasło</mat-label>
+              <input matInput type="password" [(ngModel)]="password"  [type]="hide ? 'password' : 'text'" formControlName="password">
+              <mat-icon matSuffix style="cursor: pointer;" (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+            <div >
+                <button mat-raised-button style="background-color: #00AB66;" class="w-100 p-05" (click)="onLogin()">Z a l o g u j</button>
+            </div>
+        </form>
+    </div>
+</div>

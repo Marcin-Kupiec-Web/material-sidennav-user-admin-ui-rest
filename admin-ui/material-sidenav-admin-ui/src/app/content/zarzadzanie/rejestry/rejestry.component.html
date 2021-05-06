@@ -1,0 +1,101 @@
+<mat-form-field class="col-3 p-1" *ngIf="dataSource">
+  <mat-label>Szukaj</mat-label>
+  <input matInput [formControl]="allColumnsFilter" placeholder="szukaj">
+</mat-form-field>
+<div class="shadow" >
+    <div class="example-loading-shade"
+          *ngIf="isLoadingResults || isRateLimitReached">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+      <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+     <span style="color:coral"> GitHub's API rate limit has been reached. It will be reset in one minute.</span>
+      </div>
+  </div>
+    <table mat-table [dataSource]="dataSource" matSort class="table-striped table-hover" >
+  
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="akcja">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Akcja </th>
+        <td mat-cell *matCellDef="let row"> {{row.akcja}} </td>
+      </ng-container>
+    <ng-container matColumnDef="obiekt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Obiekt </th>
+        <td mat-cell *matCellDef="let row"> {{row.obiekt}} </td>
+      </ng-container>
+
+  <ng-container matColumnDef="uzytkownik">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header > Uzytkownik </th>
+    <td mat-cell *matCellDef="let row"> {{row.uzytkownik}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="data">
+    <th mat-header-cell  *matHeaderCellDef mat-sort-header> Data </th>
+    <td mat-cell *matCellDef="let row"> {{row.data | date:'yyyy-MM-dd hh:mm'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="uwagi">
+    <th mat-header-cell  *matHeaderCellDef mat-sort-header> Uwagi </th>
+    <td mat-cell *matCellDef="let row"> {{row.uwagi}} </td>
+  </ng-container>
+<!-- th podtytuł: filtry w th -->
+  <ng-container matColumnDef="id-description">
+    <th mat-header-cell *matHeaderCellDef> 
+      <mat-form-field class="filter" floatLabel="never">
+        <mat-label>Szukaj</mat-label>
+        <input matInput [formControl]="idFilter">
+      </mat-form-field>  
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="akcja-description">
+    <th mat-header-cell *matHeaderCellDef> 
+      <mat-form-field class="filter" floatLabel="never">
+        <mat-label>Szukaj</mat-label>
+        <input matInput [formControl]="akcjaFilter">
+      </mat-form-field>  
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="obiekt-description">
+    <th mat-header-cell *matHeaderCellDef> 
+      <mat-form-field class="filter" floatLabel="never">
+        <mat-label>Szukaj</mat-label>
+        <input matInput [formControl]="obiektFilter">
+      </mat-form-field>  
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="uzytkownik-description">
+    <th mat-header-cell *matHeaderCellDef> 
+      <mat-form-field class="filter" floatLabel="never">
+        <mat-label>Szukaj</mat-label>
+        <input matInput [formControl]="uzytkownikFilter">
+      </mat-form-field>  
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="data-description">
+    <th mat-header-cell *matHeaderCellDef> 
+      <mat-form-field class="filter" floatLabel="never">
+        <mat-label>Szukaj</mat-label>
+        <input matInput [formControl]="dataFilter">
+      </mat-form-field>  
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="uwagi-description">
+    <th mat-header-cell *matHeaderCellDef> 
+      <mat-form-field class="filter" floatLabel="never">
+        <mat-label>Szukaj</mat-label>
+        <input matInput [formControl]="uwagiFilter">
+      </mat-form-field>  
+    </th>
+  </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-header-row *matHeaderRowDef="['id-description','akcja-description', 'obiekt-description', 
+      'uzytkownik-description', 'data-description', 'uwagi-description']"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+

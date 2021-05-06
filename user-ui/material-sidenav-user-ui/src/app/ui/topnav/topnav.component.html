@@ -1,0 +1,15 @@
+<mat-toolbar color="primary" class="top-nav shadow"  >
+  <button mat-icon-button class="sidenavIcon" aria-label="Otwórz boczny panel" onclick="openNav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span></span>
+  <a mat-button routerLink="/start" class="active">Home</a>
+  <a mat-button routerLink="/kontakt">Kontakt</a>
+  <a mat-button href="/start">Link 2</a>
+  <a mat-button href="#" *ngIf="hasRole('ADMIN')">Tylko admin</a>
+  <span class="example-spacer"></span>
+  <button mat-mini-fab color="accent" aria-label="Zaloguj" (click)="openDialog()">
+    <mat-icon >account_circle</mat-icon>
+  </button>
+ <!-- <mat-icon class="logoIcon" aria-hidden="false" aria-label="Example home icon">spa</mat-icon> -->
+</mat-toolbar>

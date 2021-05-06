@@ -1,0 +1,5 @@
+  <mat-toolbar color="primary" class="topnav no-print">
+    <button mat-icon-button (click)="clickMenu()"><mat-icon>menu</mat-icon></button>
+    <h1 class="example-app-name">System zarządzania wszystkim</h1>
+    <a mat-button href="#" *ngIf="hasRole('ADMIN')">Tylko admin</a>
+  </mat-toolbar>

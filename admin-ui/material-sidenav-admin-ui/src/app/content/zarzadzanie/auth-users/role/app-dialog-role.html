@@ -1,0 +1,38 @@
+
+<h1 mat-dialog-title >Modyfikuj rolę</h1>
+<div mat-dialog-content [formGroup]="roleForm">
+  <div class="row">
+    <div class="col-6">
+        <mat-form-field class="w-100 p-1">
+          <mat-label>Nazwa</mat-label>
+          <input matInput placeholder="krótka nazwa" [(ngModel)]="data.rola.name" formControlName="nameRole">
+        </mat-form-field>
+        </div>
+        <div class="col-6">
+        <mat-form-field class="w-100 p-1">
+          <mat-label>Poziom uprawnień</mat-label>
+          <input matInput placeholder="numer" [(ngModel)]="data.rola.poziomUprawnien" formControlName="poziomUprawnienRole">
+        </mat-form-field>
+        </div>
+     </div>
+      <div class="row">
+      <div class="col-12">
+        <mat-form-field class="w-100 p-1">
+          <mat-label >Role</mat-label>
+          <mat-select [compareWith]="compareWithFn" multiple [(ngModel)]="data.rola.privileges" formControlName="priviliegesRole">
+            <mat-option *ngFor="let topping of data.privilege" [value]="topping">{{topping.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+</div>
+<div mat-dialog-actions class="float-r">
+      <button mat-button color="warn" class="shadow" *ngIf="data.rola.id" (click)="usun()" (click)="openSnackBar(snackBarAction, snackBarValue)" [mat-dialog-close]="data" cdkFocusInitia aria-label="usun">Usuń</button>
+      <button mat-button color="primary" class="ml-auto shadow" (click)="zapisz()" [disabled]="!roleForm.valid"
+             (click)="openSnackBar(snackBarAction, snackBarValue)" [mat-dialog-close]="data" cdkFocusInitia aria-label="zapisz">
+              Zapisz
+      </button>
+      <button mat-icon-button color="primary" class="ml-4 shadow" (click)="onNoClick()"  aria-label="Wróć">
+             <span class="fa fa-undo" style="font-size:larger"></span>
+      </button>
+</div>

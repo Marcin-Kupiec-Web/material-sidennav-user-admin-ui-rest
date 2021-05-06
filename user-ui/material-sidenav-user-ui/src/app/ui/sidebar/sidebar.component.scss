@@ -1,0 +1,64 @@
+
+.sidenav {
+    width: 100%;
+    height: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #5366a8;
+    overflow-x: hidden;
+    transition: 0.5s;
+  }
+  .toolSidenav{
+    height: 40px;
+    background-color: #536092;
+    color:white;
+  }
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: x-large;
+    color: antiquewhite;
+    display: block;
+    transition: 0.3s;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+
+  
+  @media only screen and (min-width: 600px) {
+  .sidenav{height: 0!important;};
+  }
+
+ /* width */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #5366a8;;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(75, 122, 224);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(85, 85, 85);
+}

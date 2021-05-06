@@ -1,0 +1,53 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav fixedInViewport="!(isHandset | async)!.matches" 
+    [style.marginTop.px]="(isHandset | async)!.matches ? 0 : 0" [style.width]="(isHandset | async)!.matches ? '250px' : '250px'"
+    [mode]="(isHandset | async)!.matches ? 'over' : 'side'" [opened] = "true" class="sidenav">
+
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+             <span class="fa fa-cogs text-secondary align-middle" ></span>
+            </mat-panel-title>
+            <mat-panel-description>
+              Administracja
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <mat-nav-list class="navList">
+            <a mat-list-item routerLink="/users">Użytkownicy</a>
+            <a mat-list-item routerLink="/role">Role</a>
+            <a mat-list-item routerLink="/privileges">Uprawnienia</a>
+            <a mat-list-item routerLink="/grupy">Grupy</a>
+              <a mat-list-item routerLink="/rejestry">Rejestry</a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+        <mat-panel-title>
+        Ustawienia
+        </mat-panel-title>
+        <mat-panel-description>
+        {{panelOpenState ? 'open' : 'closed'}}
+        </mat-panel-description>
+        </mat-expansion-panel-header>
+          <br />
+            <span class="mr-3">Temat ({{theme}})</span>
+            <mat-slide-toggle (click)="toggleTheme()" ></mat-slide-toggle>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <br />
+  
+      <a mat-stroked-button routerLink="/login" class="w-100" style="padding:5px" color="accent">Wyloguj</a>
+      
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <app-topnav></app-topnav>
+        <div class="main-container">
+            <ng-content></ng-content>
+        </div>
+        <app-footer></app-footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

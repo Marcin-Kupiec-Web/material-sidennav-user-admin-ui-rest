@@ -1,0 +1,26 @@
+.top-nav .sidenavIcon{
+    display: none;
+  }
+  
+  .top-nav{
+    transition: 0.5s;
+    position: fixed;
+    top:0px;
+    z-index: 1;
+  }
+
+@media screen and (max-width: 600px) {
+  .top-nav a:not(.active) {display: none;}
+  .top-nav .sidenavIcon {
+      float: left;
+      display: block;
+    }     
+  }
+
+  .mat-elev {
+       position: relative;
+  }
+
+.example-spacer {
+  flex: 1 1 auto;
+}

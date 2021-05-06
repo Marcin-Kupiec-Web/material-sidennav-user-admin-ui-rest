@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+@import './app/css/myRespCss.css';
+html, body {
+background-color: rgb(236, 236, 236);
+}
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+.cell{
+    background: #fcfcfc;
+    border-radius:1px;
+    margin-right:5px;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+.w100{
+    min-width:100%;
+}
+.h100{
+    min-height: 100vh;
+}
+.h50{
+    min-height: 50vh;
+}
+.float-right{
+    float:right!important;
+}
+.float-left{
+    float:left!important;
+}
+.float-clear{
+    clear: both;
+}
+
+.dialog-bg {
+    background-color: rgb(78, 111, 202);
+    transition: none;
+  }

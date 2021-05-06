@@ -1,0 +1,26 @@
+
+<h1 mat-dialog-title >Modyfikuj uprawnienie</h1> 
+<div mat-dialog-content [formGroup]="privilegeForm">
+  <div class="row">
+    <div class="col-12">
+        <mat-form-field class="p-1 w-100" >
+          <mat-label>Nazwa</mat-label>
+          <input matInput placeholder="nazwa" [(ngModel)]="data.privilege.name" formControlName="namePrivilege">
+        </mat-form-field>
+      </div>
+  </div>
+</div>
+<div mat-dialog-actions class="float-r">
+    <button mat-button color="warn" class="shadow" *ngIf="data.privilege.id" (click)="usun()" 
+            (click)="openSnackBar(snackBarAction, snackBarValue)" [mat-dialog-close]="data" 
+            cdkFocusInitia aria-label="usun">
+            Usuń
+    </button>
+    <button mat-button color="primary" class="ml-auto shadow" (click)="zapisz()" [disabled]="!privilegeForm.valid"
+            (click)="openSnackBar(snackBarAction, snackBarValue)" [mat-dialog-close]="data" cdkFocusInitia aria-label="zapisz">
+               Zapisz
+    </button>
+    <button mat-icon-button color="primary" class="ml-4 shadow" (click)="onNoClick()"  aria-label="Wróć">
+      <span class="fa fa-undo" style="font-size:larger"></span>
+    </button>
+</div>
