@@ -7,9 +7,10 @@ import { CryptoAESService } from 'src/shared/crypto/crypto-aes.service';
   styleUrls: ['./start.component.scss']
 })
 export class StartComponent implements OnInit {
-public request = 'do zakodowania ten text!';
+public request = 'Chcąc chronić dane poufne, musisz je zaszyfrować. Szyfrowanie polega na zamianie zwykłego tekstu na tekst szyfrujący. Odszyfrować go mogą tylko ci, którzy znają klucz. Szyfr - Advanced Encryption Standard (AES) jest zatwierdzony przez amerykańską Agencję Bezpieczeństwa Narodowego (NSA).';
 public responseEncrypt: string;
 public responseDecrypt: string;
+public cryptDecrypt: boolean = false;
   constructor(private crypt: CryptoAESService) { }
 
   ngOnInit(): void {
